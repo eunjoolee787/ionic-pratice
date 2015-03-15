@@ -1,8 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-  console.log('hi');
-  $scope.firstname = "firstname";
+.controller('DashCtrl', function($http) {
+  var app = this;
+  app.people = [];
+
+    app.addPerson = function (person) {
+      $http.post("http://localhost:4000/form", person)
+        .success(function (data) {
+          app.people = data;
+          console.log(data);
+        })
+        .error(function (error) {
+          console.log(error);
+        })
+    }
+
 })
 
 
